@@ -4,6 +4,11 @@ Este es el **template base** para cada blog de reseñas de Amazon. No se desplie
 directamente: se copia dentro de `sites/` con `scripts/crear-nicho.mjs` (ver el
 README raíz del repositorio) y ahí se personaliza.
 
+Cada nicho se sirve bajo su propia subruta del mismo dominio (ej.
+`midominio.com/cocina-hogar/`), no en la raíz. Por eso `astro.config.mjs` fija
+`base: '/<slug>/'` y todos los enlaces/imágenes internos pasan por el helper
+`src/utils/url.ts` en vez de usar rutas absolutas (`/foo/`) directamente.
+
 ## Estructura
 
 - `src/config/site.ts` — nombre del sitio, tag de afiliado de Amazon, categorías, color.

@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
 import '../styles/global.css';
 
 interface Props {
@@ -17,7 +18,7 @@ const { titulo, descripcion = siteConfig.descripcion } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{titulo} · {siteConfig.nombre}</title>
     <meta name="description" content={descripcion} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
   </head>
   <body>
     <Header />

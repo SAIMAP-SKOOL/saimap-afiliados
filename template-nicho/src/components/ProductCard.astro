@@ -1,5 +1,6 @@
 ---
 import StarRating from './StarRating.astro';
+import { url } from '../utils/url';
 
 interface Props {
   slug: string;
@@ -10,17 +11,18 @@ interface Props {
   resumen: string;
 }
 const { slug, titulo, imagen, precioAprox, valoracion, resumen } = Astro.props;
+const enlace = url(`resenas/${slug}/`);
 ---
 <article class="tarjeta tarjeta-producto">
-  <a href={`/resenas/${slug}/`} class="imagen-link">
-    <img src={imagen} alt={titulo} loading="lazy" />
+  <a href={enlace} class="imagen-link">
+    <img src={url(imagen)} alt={titulo} loading="lazy" />
   </a>
-  <h3><a href={`/resenas/${slug}/`}>{titulo}</a></h3>
+  <h3><a href={enlace}>{titulo}</a></h3>
   <StarRating valoracion={valoracion} />
   <p class="resumen">{resumen}</p>
   <div class="pie">
     <span class="precio">{precioAprox}</span>
-    <a href={`/resenas/${slug}/`} class="boton-amazon">Ver reseña</a>
+    <a href={enlace} class="boton-amazon">Ver reseña</a>
   </div>
 </article>
 

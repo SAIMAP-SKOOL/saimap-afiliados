@@ -1,12 +1,13 @@
 ---
 import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
 ---
 <header class="cabecera">
   <div class="contenedor cabecera-interior">
-    <a href="/" class="marca">{siteConfig.nombre}</a>
+    <a href={url('')} class="marca">{siteConfig.nombre}</a>
     <nav>
       {siteConfig.categorias.map((cat) => (
-        <a href={`/categoria/${cat.slug}/`}>{cat.nombre}</a>
+        <a href={url(`categoria/${cat.slug}/`)}>{cat.nombre}</a>
       ))}
     </nav>
   </div>

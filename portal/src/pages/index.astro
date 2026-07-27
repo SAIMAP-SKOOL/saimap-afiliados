@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import nichos from '../../../nichos.json';
+
+interface Nicho {
+  slug: string;
+  nombre: string;
+  descripcion: string;
+}
+const listaNichos = nichos as Nicho[];
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAIMAP - Afiliados</title>
+    <meta name="description" content="Reseñas de productos organizadas por nicho." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="cabecera">
+      <div class="contenedor">
+        <span class="marca">SAIMAP - Afiliados</span>
+      </div>
+    </header>
+    <main class="contenedor">
+      <section class="hero">
+        <h1>Reseñas por categoría</h1>
+        <p>Elige un tema para ver nuestras reseñas de productos de Amazon.</p>
+      </section>
+
+      <div class="grid-nichos">
+        {listaNichos.map((nicho) => (
+          <a class="tarjeta tarjeta-nicho" href={`/${nicho.slug}/`}>
+            <h2>{nicho.nombre}</h2>
+            <p>{nicho.descripcion}</p>
+          </a>
+        ))}
+      </div>
+
+      {listaNichos.length === 0 && (
+        <p class="vacio">
+          Todavía no hay nichos publicados. Se crean con
+          <code>node scripts/crear-nicho.mjs</code> y aparecerán aquí
+          automáticamente.
+        </p>
+      )}
+    </main>
+    <footer class="pie-pagina">
+      <div class="contenedor">
+        <p>© {new Date().getFullYear()} SAIMAP - Afiliados.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .cabecera {
+    border-bottom: 1px solid var(--color-borde);
+    padding: 1rem 0;
+  }
+  .marca {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--color-primario);
+  }
+  .hero {
+    padding: 2.5rem 0 1.5rem;
+  }
+  .hero p {
+    color: #555;
+    max-width: 60ch;
+  }
+  .tarjeta-nicho {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease;
+  }
+  .tarjeta-nicho:hover {
+    transform: translateY(-2px);
+  }
+  .tarjeta-nicho h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+  }
+  .tarjeta-nicho p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  .vacio {
+    color: #666;
+  }
+  .vacio code {
+    background: var(--color-fondo-alt);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+  }
+  .pie-pagina {
+    padding: 2rem 0;
+    color: #666;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+</style>

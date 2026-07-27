@@ -1,4 +1,6 @@
 ---
+import { url } from '../utils/url';
+
 interface Fila {
   producto: string;
   precioAprox: string;
@@ -28,7 +30,7 @@ const { filas } = Astro.props;
         <td>{fila.precioAprox}</td>
         <td>{fila.valoracion.toFixed(1)} / 5</td>
         <td>{fila.destacadoTexto ?? '—'}</td>
-        <td><a href={`/resenas/${fila.slug}/`} class="boton-amazon">Ver</a></td>
+        <td><a href={url(`resenas/${fila.slug}/`)} class="boton-amazon">Ver</a></td>
       </tr>
     ))}
   </tbody>

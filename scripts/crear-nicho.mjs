@@ -38,7 +38,12 @@ if (existsSync(destino)) {
 mkdirSync(destino, { recursive: true });
 cpSync(origen, destino, {
   recursive: true,
-  filter: (ruta) => !/node_modules|dist|\.astro(\\|\/|$)/.test(ruta),
+  // Excluye node_modules/, dist/ y la caché .astro/ como carpetas, sin tocar
+  // archivos de código que terminan en ".astro" (ej. index.astro).
+  filter: (ruta) => {
+    const segmentos = ruta.split(/[\\/]/);
+    return !segmentos.includes('node_modules') && !segmentos.includes('dist') && !segmentos.includes('.astro');
+  },
 });
 
 // Personalizar src/config/site.ts
@@ -58,10 +63,27 @@ const pkg = JSON.parse(readFileSync(rutaPkg, 'utf-8'));
 pkg.name = `saimap-afiliados-${slug}`;
 writeFileSync(rutaPkg, JSON.stringify(pkg, null, 2) + '\n');
 
-console.log(`Nicho creado en sites/${slug}`);
+// Personalizar astro.config.mjs: el nicho se sirve bajo /<slug>/, no en la raíz.
+const rutaAstroConfig = join(destino, 'astro.config.mjs');
+let astroConfig = readFileSync(rutaAstroConfig, 'utf-8');
+astroConfig = astroConfig.replace(/base: '.*?'/, `base: '/${slug}/'`);
+writeFileSync(rutaAstroConfig, astroConfig);
+
+// Registrar el nicho en nichos.json para que el portal (página principal) lo liste.
+const rutaRegistro = join(raiz, 'nichos.json');
+const registro = JSON.parse(readFileSync(rutaRegistro, 'utf-8'));
+if (registro.some((n) => n.slug === slug)) {
+  console.error(`El slug "${slug}" ya estaba registrado en nichos.json.`);
+  process.exit(1);
+}
+registro.push({ slug, nombre, descripcion: descripcion ?? '' });
+writeFileSync(rutaRegistro, JSON.stringify(registro, null, 2) + '\n');
+
+console.log(`Nicho creado en sites/${slug} y registrado en nichos.json`);
 console.log('Siguientes pasos:');
 console.log(`  cd "sites/${slug}"`);
 console.log('  npm install');
 console.log('  npm run dev');
 console.log('');
 console.log('Recuerda añadir categorías reales en src/config/site.ts y tus primeras reseñas en src/content/resenas/.');
+console.log('Cuando quieras publicar todo junto (portal + nichos), ejecuta: node scripts/build-todo.mjs');

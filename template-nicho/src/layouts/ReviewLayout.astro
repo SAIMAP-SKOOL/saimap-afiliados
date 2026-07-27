@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import StarRating from '../components/StarRating.astro';
 import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
 
 interface Props {
   titulo: string;
@@ -30,7 +31,7 @@ const {
   <article class="resena">
     <h1>{titulo}</h1>
     <div class="cabecera-resena">
-      <img src={imagen} alt={producto} loading="lazy" />
+      <img src={url(imagen)} alt={producto} loading="lazy" />
       <div class="resumen-resena">
         <StarRating valoracion={valoracion} />
         <p class="precio">Precio aproximado: <strong>{precioAprox}</strong></p>

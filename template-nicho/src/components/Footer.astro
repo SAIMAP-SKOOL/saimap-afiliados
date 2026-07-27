@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '../config/site';
 import AvisoAfiliados from './AvisoAfiliados.astro';
+import { url } from '../utils/url';
 const anio = new Date().getFullYear();
 ---
 <AvisoAfiliados />
@@ -8,7 +9,7 @@ const anio = new Date().getFullYear();
   <div class="contenedor">
     <p>© {anio} {siteConfig.nombre}. Todos los derechos reservados.</p>
     <p class="enlaces-legales">
-      <a href="/aviso-afiliados/">Aviso de afiliados</a>
+      <a href={url('aviso-afiliados/')}>Aviso de afiliados</a>
     </p>
   </div>
 </footer>
