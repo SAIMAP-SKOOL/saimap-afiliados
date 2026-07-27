@@ -1,9 +1,10 @@
 import { defineConfig } from 'astro/config';
 
-// El portal vive en la raíz del dominio; cada nicho se sirve bajo su propia
-// subruta (ej. /cocina-hogar/), fuera del alcance de este site.
+// Desplegado como GitHub Pages "de proyecto": vive bajo /saimap-afiliados/,
+// no en la raíz del dominio. Si en el futuro se usa un dominio propio, cambia
+// "site" y "base" aquí (y ajusta el prefijo de base en cada sites/<slug>/).
 export default defineConfig({
-  site: 'https://example.com',
-  base: '/',
+  site: 'https://saimap-skool.github.io',
+  base: '/saimap-afiliados/',
   output: 'static',
 });

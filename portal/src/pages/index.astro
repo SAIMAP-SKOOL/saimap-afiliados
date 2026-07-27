@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import nichos from '../../../nichos.json';
+import { url } from '../utils/url';
 
 interface Nicho {
   slug: string;
@@ -16,7 +17,7 @@ const listaNichos = nichos as Nicho[];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SAIMAP - Afiliados</title>
     <meta name="description" content="Reseñas de productos organizadas por nicho." />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
   </head>
   <body>
     <header class="cabecera">
@@ -32,7 +33,7 @@ const listaNichos = nichos as Nicho[];
 
       <div class="grid-nichos">
         {listaNichos.map((nicho) => (
-          <a class="tarjeta tarjeta-nicho" href={`/${nicho.slug}/`}>
+          <a class="tarjeta tarjeta-nicho" href={url(`${nicho.slug}/`)}>
             <h2>{nicho.nombre}</h2>
             <p>{nicho.descripcion}</p>
           </a>
