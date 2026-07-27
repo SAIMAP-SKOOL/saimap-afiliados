@@ -1,0 +1,33 @@
+---
+interface Props {
+  valoracion: number;
+}
+const { valoracion } = Astro.props;
+const llenas = Math.round(valoracion);
+---
+<span class="star-rating" aria-label={`Valoración ${valoracion} de 5`}>
+  {Array.from({ length: 5 }).map((_, i) => (
+    <span class={i < llenas ? 'estrella llena' : 'estrella'}>★</span>
+  ))}
+  <span class="valor">{valoracion.toFixed(1)}</span>
+</span>
+
+<style>
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .estrella {
+    color: #d8d8e0;
+    font-size: 1.1rem;
+  }
+  .estrella.llena {
+    color: var(--color-acento);
+  }
+  .valor {
+    margin-left: 0.4rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+</style>
