@@ -16,6 +16,10 @@ const resenas = defineCollection({
     destacado: z.boolean().default(false),
     fechaPublicacion: z.date(),
     resumen: z.string(),
+    especificaciones: z.record(z.string(), z.string()).optional(),
+    preguntasFrecuentes: z
+      .array(z.object({ pregunta: z.string(), respuesta: z.string() }))
+      .optional(),
   }),
 });
 

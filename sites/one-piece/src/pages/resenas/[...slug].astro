@@ -14,15 +14,20 @@ const { entrada } = Astro.props;
 const { Content } = await entrada.render();
 ---
 <ReviewLayout
+  slug={entrada.slug}
   titulo={entrada.data.titulo}
   producto={entrada.data.producto}
+  marca={entrada.data.marca}
   imagen={entrada.data.imagen}
   precioAprox={entrada.data.precioAprox}
   valoracion={entrada.data.valoracion}
   pros={entrada.data.pros}
   contras={entrada.data.contras}
   urlAmazon={entrada.data.urlAmazon}
+  categoria={entrada.data.categoria}
   resumen={entrada.data.resumen}
+  especificaciones={entrada.data.especificaciones}
+  preguntasFrecuentes={entrada.data.preguntasFrecuentes}
 >
   <Content />
 </ReviewLayout>

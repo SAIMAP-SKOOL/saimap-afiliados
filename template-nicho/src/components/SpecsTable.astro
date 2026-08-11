@@ -1,0 +1,40 @@
+---
+interface Props {
+  especificaciones: Record<string, string>;
+}
+const { especificaciones } = Astro.props;
+---
+<table class="tabla-specs">
+  <tbody>
+    {Object.entries(especificaciones).map(([clave, valor]) => (
+      <tr>
+        <th>{clave}</th>
+        <td>{valor}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+  .tabla-specs {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.92rem;
+  }
+  .tabla-specs th,
+  .tabla-specs td {
+    padding: 0.55rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde);
+  }
+  .tabla-specs th {
+    width: 42%;
+    color: #555;
+    font-weight: 600;
+  }
+  .tabla-specs tr:last-child th,
+  .tabla-specs tr:last-child td {
+    border-bottom: none;
+  }
+</style>

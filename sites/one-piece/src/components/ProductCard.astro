@@ -33,6 +33,11 @@ const enlace = url(`resenas/${slug}/`);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .tarjeta-producto:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   }
   .imagen-link img {
     width: 100%;
