@@ -2,6 +2,7 @@
 titulo: "One Piece nº 01 (3 en 1): la mejor forma de empezar la colección"
 producto: "One Piece nº 01 (3 en 1) (Manga Shonen)"
 marca: "Planeta Cómic"
+imagen: "/media/one-piece-01-infografia.jpg"
 precioAprox: "16,10 €"
 pros:
   - "Reúne los tomos 1, 2 y 3 originales en un único volumen de 592 páginas, a mejor precio que comprarlos sueltos"
@@ -23,3 +24,9 @@ Además de la historia, el volumen incluye las portadas originales de cada tomo 
 Entre los compradores, los comentarios repetidos giran en torno a tres cosas: que esta edición sale más a cuenta que comprar los tomos sueltos, que la traducción cuida los nombres originales de los personajes, y que el acabado del libro es sólido para tenerlo en una estantería. El único matiz que aparece con cierta frecuencia es que, cuando un ataque se menciona en japonés y en español dentro del mismo bocadillo, el texto queda algo apretado.
 
 Recomendado desde los 11 años según la propia ficha del producto, es el punto de partida lógico si quieres empezar a coleccionar One Piece en papel.
+
+## El fenómeno de One Piece
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/9x4VrP8JCFU" title="El Fenómeno de One Piece" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
