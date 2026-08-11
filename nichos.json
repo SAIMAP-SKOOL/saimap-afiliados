@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "slug": "one-piece",
+    "nombre": "One Piece",
+    "descripcion": "Reseñas de manga, figuras y merchandising de One Piece"
+  },
+  {
+    "slug": "pokemon",
+    "nombre": "Pokémon",
+    "descripcion": "Reseñas de cartas, peluches y merchandising de Pokémon"
+  }
+]

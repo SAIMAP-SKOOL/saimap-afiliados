@@ -1,0 +1,37 @@
+---
+import { url } from '../utils/url';
+
+interface Fila {
+  producto: string;
+  precioAprox: string;
+  valoracion: number;
+  slug: string;
+  destacadoTexto?: string;
+}
+interface Props {
+  filas: Fila[];
+}
+const { filas } = Astro.props;
+---
+<table class="tabla-comparativa">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Precio aprox.</th>
+      <th>Valoración</th>
+      <th>Destaca por</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {filas.map((fila) => (
+      <tr>
+        <td>{fila.producto}</td>
+        <td>{fila.precioAprox}</td>
+        <td>{fila.valoracion.toFixed(1)} / 5</td>
+        <td>{fila.destacadoTexto ?? '—'}</td>
+        <td><a href={url(`resenas/${fila.slug}/`)} class="boton-amazon">Ver</a></td>
+      </tr>
+    ))}
+  </tbody>
+</table>

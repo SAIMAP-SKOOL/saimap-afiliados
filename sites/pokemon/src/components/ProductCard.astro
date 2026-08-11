@@ -1,0 +1,63 @@
+---
+import StarRating from './StarRating.astro';
+import { url } from '../utils/url';
+
+interface Props {
+  slug: string;
+  titulo: string;
+  imagen: string;
+  precioAprox: string;
+  valoracion: number;
+  resumen: string;
+}
+const { slug, titulo, imagen, precioAprox, valoracion, resumen } = Astro.props;
+const enlace = url(`resenas/${slug}/`);
+---
+<article class="tarjeta tarjeta-producto">
+  <a href={enlace} class="imagen-link">
+    <img src={url(imagen)} alt={titulo} loading="lazy" />
+  </a>
+  <h3><a href={enlace}>{titulo}</a></h3>
+  <StarRating valoracion={valoracion} />
+  <p class="resumen">{resumen}</p>
+  <div class="pie">
+    <span class="precio">{precioAprox}</span>
+    <a href={enlace} class="boton-amazon">Ver reseña</a>
+  </div>
+</article>
+
+<style>
+  .tarjeta-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .imagen-link img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: var(--color-fondo-alt);
+    border-radius: 6px;
+  }
+  h3 {
+    margin: 0.25rem 0 0;
+    font-size: 1.05rem;
+  }
+  h3 a {
+    text-decoration: none;
+  }
+  .resumen {
+    font-size: 0.9rem;
+    color: #555;
+    flex-grow: 1;
+  }
+  .pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .precio {
+    font-weight: 700;
+  }
+</style>

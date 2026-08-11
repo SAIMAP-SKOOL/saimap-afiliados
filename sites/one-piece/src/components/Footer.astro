@@ -1,0 +1,27 @@
+---
+import { siteConfig } from '../config/site';
+import AvisoAfiliados from './AvisoAfiliados.astro';
+import { url } from '../utils/url';
+const anio = new Date().getFullYear();
+---
+<AvisoAfiliados />
+<footer class="pie-pagina">
+  <div class="contenedor">
+    <p>© {anio} {siteConfig.nombre}. Todos los derechos reservados.</p>
+    <p class="enlaces-legales">
+      <a href={url('aviso-afiliados/')}>Aviso de afiliados</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .pie-pagina {
+    padding: 1.5rem 0 2.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+  }
+  .enlaces-legales a {
+    text-decoration: underline;
+  }
+</style>

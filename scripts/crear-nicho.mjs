@@ -63,10 +63,14 @@ const pkg = JSON.parse(readFileSync(rutaPkg, 'utf-8'));
 pkg.name = `saimap-afiliados-${slug}`;
 writeFileSync(rutaPkg, JSON.stringify(pkg, null, 2) + '\n');
 
-// Personalizar astro.config.mjs: el nicho se sirve bajo /<slug>/, no en la raíz.
+// Personalizar astro.config.mjs: el nicho se sirve bajo /saimap-afiliados/<slug>/,
+// porque el portal está desplegado como GitHub Pages de proyecto (sin dominio
+// propio todavía). Si en el futuro se usa un dominio propio, quitar este prefijo.
+const PREFIJO_DEPLOY = '/saimap-afiliados';
 const rutaAstroConfig = join(destino, 'astro.config.mjs');
 let astroConfig = readFileSync(rutaAstroConfig, 'utf-8');
-astroConfig = astroConfig.replace(/base: '.*?'/, `base: '/${slug}/'`);
+astroConfig = astroConfig.replace(/base: '.*?'/, `base: '${PREFIJO_DEPLOY}/${slug}/'`);
+astroConfig = astroConfig.replace(/site: '.*?'/, `site: 'https://saimap-skool.github.io'`);
 writeFileSync(rutaAstroConfig, astroConfig);
 
 // Registrar el nicho en nichos.json para que el portal (página principal) lo liste.

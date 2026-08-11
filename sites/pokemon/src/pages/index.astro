@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '../config/site';
+
+const resenas = (await getCollection('resenas')).sort(
+  (a, b) => b.data.fechaPublicacion.valueOf() - a.data.fechaPublicacion.valueOf()
+);
+---
+<BaseLayout titulo="Inicio">
+  <section class="hero">
+    <h1>{siteConfig.nombre}</h1>
+    <p>{siteConfig.descripcion}</p>
+  </section>
+
+  <section>
+    <h2>Últimas reseñas</h2>
+    <div class="grid-productos">
+      {resenas.map((r) => (
+        <ProductCard
+          slug={r.slug}
+          titulo={r.data.titulo}
+          imagen={r.data.imagen}
+          precioAprox={r.data.precioAprox}
+          valoracion={r.data.valoracion}
+          resumen={r.data.resumen}
+        />
+      ))}
+    </div>
+    {resenas.length === 0 && (
+      <p>Todavía no hay reseñas publicadas. Añade archivos Markdown en <code>src/content/resenas/</code>.</p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 2rem 0 1rem;
+  }
+  .hero p {
+    color: #555;
+    max-width: 60ch;
+  }
+</style>

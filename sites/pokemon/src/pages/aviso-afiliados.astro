@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+---
+<BaseLayout titulo="Aviso de Afiliados">
+  <h1>Aviso de Afiliados</h1>
+  <p>
+    {siteConfig.nombre} participa en el Programa de Afiliados de Amazon EU,
+    un programa de publicidad para afiliados diseñado para ofrecer a los
+    sitios web un modo de obtener comisiones por publicidad, publicitando e
+    incluyendo enlaces a Amazon.es (y otros dominios de Amazon).
+  </p>
+  <p>
+    Como Afiliado de Amazon, {siteConfig.nombre} gana por las compras
+    adscritas que cumplen los requisitos aplicables. Esto significa que si
+    haces clic en uno de los enlaces a productos de Amazon en este sitio y
+    realizas una compra, podemos recibir una pequeña comisión, sin coste
+    adicional para ti.
+  </p>
+  <p>
+    Las opiniones, valoraciones y recomendaciones que publicamos son
+    independientes y se basan en la información disponible sobre cada
+    producto. No aceptamos reseñas patrocinadas ni contenido a cambio de
+    valoraciones positivas.
+  </p>
+  <p>
+    Los precios mostrados son aproximados y pueden variar respecto al precio
+    final en Amazon en el momento de la compra.
+  </p>
+</BaseLayout>

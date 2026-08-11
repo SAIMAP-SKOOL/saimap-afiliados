@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+
+export async function getStaticPaths() {
+  const resenas = await getCollection('resenas');
+  return resenas.map((entrada) => ({
+    params: { slug: entrada.slug },
+    props: { entrada },
+  }));
+}
+
+const { entrada } = Astro.props;
+const { Content } = await entrada.render();
+---
+<ReviewLayout
+  titulo={entrada.data.titulo}
+  producto={entrada.data.producto}
+  imagen={entrada.data.imagen}
+  precioAprox={entrada.data.precioAprox}
+  valoracion={entrada.data.valoracion}
+  pros={entrada.data.pros}
+  contras={entrada.data.contras}
+  urlAmazon={entrada.data.urlAmazon}
+  resumen={entrada.data.resumen}
+>
+  <Content />
+</ReviewLayout>

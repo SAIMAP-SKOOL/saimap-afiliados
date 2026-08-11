@@ -1,0 +1,115 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import StarRating from '../components/StarRating.astro';
+import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
+
+interface Props {
+  titulo: string;
+  producto: string;
+  imagen: string;
+  precioAprox: string;
+  valoracion: number;
+  pros: string[];
+  contras: string[];
+  urlAmazon: string;
+  resumen: string;
+}
+const {
+  titulo,
+  producto,
+  imagen,
+  precioAprox,
+  valoracion,
+  pros,
+  contras,
+  urlAmazon,
+  resumen,
+} = Astro.props;
+---
+<BaseLayout titulo={titulo} descripcion={resumen}>
+  <article class="resena">
+    <h1>{titulo}</h1>
+    <div class="cabecera-resena">
+      <img src={url(imagen)} alt={producto} loading="lazy" />
+      <div class="resumen-resena">
+        <StarRating valoracion={valoracion} />
+        <p class="precio">Precio aproximado: <strong>{precioAprox}</strong></p>
+        <a
+          href={`${urlAmazon}${urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`}
+          class="boton-amazon"
+          target="_blank"
+          rel="nofollow sponsored noopener"
+        >
+          Ver precio en Amazon
+        </a>
+      </div>
+    </div>
+
+    <div class="pros-contras">
+      <div class="tarjeta">
+        <h2>Pros</h2>
+        <ul>
+          {pros.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+      <div class="tarjeta">
+        <h2>Contras</h2>
+        <ul>
+          {contras.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="cuerpo-resena">
+      <slot />
+    </div>
+
+    <a
+      href={`${urlAmazon}${urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`}
+      class="boton-amazon"
+      target="_blank"
+      rel="nofollow sponsored noopener"
+    >
+      Comprar en Amazon
+    </a>
+  </article>
+</BaseLayout>
+
+<style>
+  .resena h1 {
+    margin-top: 1.5rem;
+  }
+  .cabecera-resena {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .cabecera-resena img {
+    max-width: 320px;
+    width: 100%;
+    background: var(--color-fondo-alt);
+    border-radius: var(--radio);
+  }
+  .resumen-resena {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .pros-contras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .cuerpo-resena {
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 600px) {
+    .pros-contras {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

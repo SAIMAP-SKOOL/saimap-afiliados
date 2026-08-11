@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { siteConfig } from '../../config/site';
+
+export async function getStaticPaths() {
+  return siteConfig.categorias.map((cat) => ({
+    params: { categoria: cat.slug },
+    props: { cat },
+  }));
+}
+
+const { cat } = Astro.props;
+const resenas = (await getCollection('resenas')).filter(
+  (r) => r.data.categoria === cat.slug
+);
+---
+<BaseLayout titulo={cat.nombre}>
+  <h1>{cat.nombre}</h1>
+  <div class="grid-productos">
+    {resenas.map((r) => (
+      <ProductCard
+        slug={r.slug}
+        titulo={r.data.titulo}
+        imagen={r.data.imagen}
+        precioAprox={r.data.precioAprox}
+        valoracion={r.data.valoracion}
+        resumen={r.data.resumen}
+      />
+    ))}
+  </div>
+  {resenas.length === 0 && <p>Todavía no hay reseñas en esta categoría.</p>}
+</BaseLayout>
