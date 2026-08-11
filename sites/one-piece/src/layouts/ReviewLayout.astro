@@ -7,9 +7,9 @@ import { url } from '../utils/url';
 interface Props {
   titulo: string;
   producto: string;
-  imagen: string;
+  imagen?: string;
   precioAprox: string;
-  valoracion: number;
+  valoracion?: number;
   pros: string[];
   contras: string[];
   urlAmazon: string;
@@ -31,9 +31,9 @@ const {
   <article class="resena">
     <h1>{titulo}</h1>
     <div class="cabecera-resena">
-      <img src={url(imagen)} alt={producto} loading="lazy" />
+      {imagen && <img src={url(imagen)} alt={producto} loading="lazy" />}
       <div class="resumen-resena">
-        <StarRating valoracion={valoracion} />
+        {valoracion !== undefined && <StarRating valoracion={valoracion} />}
         <p class="precio">Precio aproximado: <strong>{precioAprox}</strong></p>
         <a
           href={`${urlAmazon}${urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`}

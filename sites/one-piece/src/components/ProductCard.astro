@@ -5,20 +5,22 @@ import { url } from '../utils/url';
 interface Props {
   slug: string;
   titulo: string;
-  imagen: string;
+  imagen?: string;
   precioAprox: string;
-  valoracion: number;
+  valoracion?: number;
   resumen: string;
 }
 const { slug, titulo, imagen, precioAprox, valoracion, resumen } = Astro.props;
 const enlace = url(`resenas/${slug}/`);
 ---
 <article class="tarjeta tarjeta-producto">
-  <a href={enlace} class="imagen-link">
-    <img src={url(imagen)} alt={titulo} loading="lazy" />
-  </a>
+  {imagen && (
+    <a href={enlace} class="imagen-link">
+      <img src={url(imagen)} alt={titulo} loading="lazy" />
+    </a>
+  )}
   <h3><a href={enlace}>{titulo}</a></h3>
-  <StarRating valoracion={valoracion} />
+  {valoracion !== undefined && <StarRating valoracion={valoracion} />}
   <p class="resumen">{resumen}</p>
   <div class="pie">
     <span class="precio">{precioAprox}</span>
