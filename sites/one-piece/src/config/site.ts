@@ -7,6 +7,7 @@ export const siteConfig = {
   // Tag de Afiliado de Amazon España, ej: "sainicho-21"
   amazonTag: 'saimap0b-21',
   colorPrimario: '#1a1a2e',
+  fondoPatron: '/media/fondo-wanted.jpg',
   categorias: [
     { slug: 'manga', nombre: 'Manga' },
     { slug: 'figuras', nombre: 'Figuras' },

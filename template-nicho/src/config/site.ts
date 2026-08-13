@@ -7,6 +7,10 @@ export const siteConfig = {
   // Tag de Afiliado de Amazon España, ej: "sainicho-21"
   amazonTag: 'tu-tag-21',
   colorPrimario: '#1a1a2e',
+  // Ruta opcional (dentro de public/) a una imagen de fondo temática,
+  // repetida sutilmente detrás del contenido. Déjalo sin definir para
+  // usar el fondo blanco por defecto.
+  fondoPatron: undefined as string | undefined,
   categorias: [
     { slug: 'general', nombre: 'General' },
   ],

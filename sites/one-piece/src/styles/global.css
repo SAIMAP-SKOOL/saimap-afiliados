@@ -115,3 +115,34 @@ table.tabla-comparativa th {
   height: 100%;
   border: 0;
 }
+
+/* Fondo temático opcional (siteConfig.fondoPatron): imagen repetida a baja
+   presencia con un velo claro encima para que el contenido siga siendo
+   legible, y tonos de tarjeta ligeramente cálidos ("pergamino"). */
+body.con-fondo-patron {
+  --color-fondo-alt: #f7f0e2;
+  --color-borde: #e6d9b8;
+  background-repeat: repeat;
+  background-size: 320px auto;
+  background-attachment: fixed;
+}
+
+body.con-fondo-patron::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.87);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.con-fondo-patron > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.con-fondo-patron .tarjeta,
+body.con-fondo-patron .cta-banda,
+body.con-fondo-patron .video-embed {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
