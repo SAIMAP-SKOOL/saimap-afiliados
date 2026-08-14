@@ -2,6 +2,7 @@
 numero: 3
 titulo: "Aparece «el Cazador de Piratas Zoro»"
 tituloJapones: "”海賊狩りのゾロ”登場"
+imagen: "/media/capitulo-03-infografia.jpg"
 volumen: 1
 arco: "Romance Dawn"
 personajes:

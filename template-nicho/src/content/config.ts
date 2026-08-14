@@ -32,6 +32,7 @@ const capitulos = defineCollection({
     numero: z.number(),
     titulo: z.string(),
     tituloJapones: z.string().optional(),
+    imagen: z.string().optional(),
     volumen: z.number(),
     arco: z.string(),
     personajes: z.array(z.string()).optional(),

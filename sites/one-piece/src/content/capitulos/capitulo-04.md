@@ -2,6 +2,7 @@
 numero: 4
 titulo: "Capitán de la Marina «Mano de Hacha Morgan»"
 tituloJapones: "海軍大佐”斧手のモーガン”"
+imagen: "/media/capitulo-04-infografia.jpg"
 volumen: 1
 arco: "Romance Dawn"
 personajes:

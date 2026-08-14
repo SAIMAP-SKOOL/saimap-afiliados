@@ -2,6 +2,7 @@
 numero: 5
 titulo: "El Rey de los Piratas y el Maestro Espadachín"
 tituloJapones: "海賊王と大剣豪"
+imagen: "/media/capitulo-05-infografia.jpg"
 volumen: 1
 arco: "Romance Dawn"
 personajes:

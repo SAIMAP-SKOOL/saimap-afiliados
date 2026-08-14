@@ -10,6 +10,7 @@ interface Props {
   numero: number;
   titulo: string;
   tituloJapones?: string;
+  imagen?: string;
   volumen: number;
   arco: string;
   personajes?: string[];
@@ -24,6 +25,7 @@ const {
   numero,
   titulo,
   tituloJapones,
+  imagen,
   volumen,
   arco,
   personajes,
@@ -61,7 +63,7 @@ const jsonLd = [
   },
 ];
 ---
-<BaseLayout titulo={`Capítulo ${numero}: ${titulo}`} descripcion={resumenCorto} tipo="article" jsonLd={jsonLd}>
+<BaseLayout titulo={`Capítulo ${numero}: ${titulo}`} descripcion={resumenCorto} imagenOg={imagen} tipo="article" jsonLd={jsonLd}>
   <Breadcrumbs
     migas={[
       { nombre: 'Inicio', href: '' },
@@ -90,6 +92,10 @@ const jsonLd = [
         </div>
       )}
     </div>
+
+    {imagen && (
+      <img src={url(imagen)} alt={`Infografía del capítulo ${numero}: ${titulo}`} loading="lazy" class="imagen-capitulo" />
+    )}
 
     <div class="compra-capitulo tarjeta">
       <h2>¿Dónde leer este capítulo?</h2>
@@ -168,6 +174,13 @@ const jsonLd = [
   }
   .cuerpo-capitulo :global(p) {
     max-width: 68ch;
+  }
+  .imagen-capitulo {
+    display: block;
+    width: 100%;
+    border-radius: var(--radio);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    margin-bottom: 1.75rem;
   }
   .compra-capitulo {
     text-align: center;

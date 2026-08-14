@@ -2,6 +2,7 @@
 numero: 1
 titulo: "Romance Dawn: el amanecer de una aventura"
 tituloJapones: "ROMANCE DAWN―冒険の夜明け―"
+imagen: "/media/capitulo-01-infografia.jpg"
 volumen: 1
 arco: "Romance Dawn"
 personajes:

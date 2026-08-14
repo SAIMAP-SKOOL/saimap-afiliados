@@ -2,6 +2,7 @@
 numero: 2
 titulo: "Ese chico es, «Luffy Sombrero de Paja»"
 tituloJapones: "その男”麦わらのルフィ”"
+imagen: "/media/capitulo-02-infografia.jpg"
 volumen: 1
 arco: "Romance Dawn"
 personajes:
