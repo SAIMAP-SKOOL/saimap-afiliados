@@ -35,3 +35,9 @@ Luffy arrastra a Helmeppo a la fuerza para que le indique dónde están las espa
 ## Por qué importa este capítulo
 
 Este capítulo termina de construir al villano del arco: un capitán de la Marina más preocupado por su propia imagen (literalmente, una estatua de sí mismo) que por proteger al pueblo que se supone debe custodiar. Es también el primer gran acto de valentía de Koby, que hasta ahora solo había hablado de convertirse en marine.
+
+## Este capítulo en vídeo
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/lU8tHu_QJ3c" title="Análisis One Piece Manga 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>

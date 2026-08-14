@@ -33,3 +33,9 @@ Cuando Alvida los descubre, le pregunta a Luffy, como hace con todos, quién es 
 ## Por qué importa este capítulo
 
 Este capítulo presenta a Koby, el primer personaje al que Luffy influye directamente con su forma de ver la vida, y adelanta un patrón que se repetirá durante toda la serie: Luffy no recluta gente para que se le una, sino que su actitud empuja a otros a perseguir sus propios sueños, tenga o no que ver con la piratería.
+
+## Este capítulo en vídeo
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/bDDUfTQ5Htk" title="Análisis One Piece Manga 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>

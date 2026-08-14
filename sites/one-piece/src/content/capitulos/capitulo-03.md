@@ -33,3 +33,9 @@ Cuando Helmeppo se marcha, Luffy le propone a Zoro unirse a su tripulación. Zor
 ## Por qué importa este capítulo
 
 Este capítulo presenta a Zoro exactamente al revés de como lo describe su reputación: un prisionero atado y hambriento, pero con un código de honor que no está dispuesto a romper ni siquiera para salvarse. Ese contraste entre fama y carácter real es la carta de presentación del que será el primer miembro de la tripulación de Luffy.
+
+## Este capítulo en vídeo
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/UEk_IT9FCDc" title="Análisis One Piece Manga 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>

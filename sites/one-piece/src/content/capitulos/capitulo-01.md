@@ -34,3 +34,9 @@ Cuando Shanks y su tripulación zarpan, Higuma reaparece en el pueblo. Luffy, to
 ## Por qué importa este capítulo
 
 Este primer capítulo planta dos semillas que sostienen toda la serie: el sueño de Luffy de ser el Rey de los Piratas y el precio que paga por su poder (no poder nadar), un contraste que la propia historia recordará constantemente. También presenta la relación con Shanks, cuyo desenlace —Luffy pierde el brazo izquierdo de Shanks al salvarlo del monstruo marino, según se cuenta ya en la propia ficha del tomo— es el motivo por el que, diez años después, Luffy se hace a la mar con el sombrero de paja que Shanks le regaló.
+
+## Este capítulo en vídeo
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/lLlVPTIhLng" title="Análisis One Piece Manga 1 | ROMANCE DAWN" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>

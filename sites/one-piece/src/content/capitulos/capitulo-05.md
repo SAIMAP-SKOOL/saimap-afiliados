@@ -32,3 +32,9 @@ De vuelta al presente, con Morgan decidido a acabar con los tres, Luffy llega ju
 ## Por qué importa este capítulo
 
 Este es el capítulo que explica por qué Zoro persigue con tanta obsesión ser el mejor espadachín del mundo: no es ambición vacía, es una promesa hecha a alguien que ya no puede cumplir la suya. Es también el momento en el que su historia y la de Luffy convergen del todo, cerrando el arco de presentación de Zoro justo antes de que la tripulación empiece a tomar forma de verdad.
+
+## Este capítulo en vídeo
+
+<div class="video-embed">
+  <iframe src="https://www.youtube.com/embed/819ofJZoa6E" title="Análisis One Piece Manga 5" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
