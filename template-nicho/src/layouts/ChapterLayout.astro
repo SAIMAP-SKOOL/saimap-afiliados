@@ -91,10 +91,6 @@ const jsonLd = [
       )}
     </div>
 
-    <div class="cuerpo-capitulo tarjeta">
-      <slot />
-    </div>
-
     <div class="compra-capitulo tarjeta">
       <h2>¿Dónde leer este capítulo?</h2>
       <p>Este capítulo forma parte del volumen {volumen} de One Piece, disponible en dos formatos:</p>
@@ -113,6 +109,10 @@ const jsonLd = [
           <a href={url(`resenas/${resenaTomo.slug}/`)}>Ver la reseña completa de este tomo →</a>
         </p>
       )}
+    </div>
+
+    <div class="cuerpo-capitulo tarjeta">
+      <slot />
     </div>
 
     <nav class="nav-capitulos">
