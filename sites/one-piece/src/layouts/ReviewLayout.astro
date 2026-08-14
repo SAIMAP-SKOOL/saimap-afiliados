@@ -100,7 +100,7 @@ if (preguntasFrecuentes && preguntasFrecuentes.length > 0) {
   <article class="resena">
     <h1>{titulo}</h1>
 
-    <div class="cabecera-resena">
+    <div class="cabecera-resena tarjeta">
       {imagen && <img src={url(imagen)} alt={producto} loading="eager" />}
       <div class="resumen-resena">
         {valoracion !== undefined && <StarRating valoracion={valoracion} />}
@@ -132,13 +132,13 @@ if (preguntasFrecuentes && preguntasFrecuentes.length > 0) {
     </div>
 
     {especificaciones && (
-      <section class="specs">
+      <section class="specs tarjeta">
         <h2>Ficha técnica</h2>
         <SpecsTable especificaciones={especificaciones} />
       </section>
     )}
 
-    <div class="cuerpo-resena">
+    <div class="cuerpo-resena tarjeta">
       <slot />
     </div>
 
@@ -216,13 +216,21 @@ if (preguntasFrecuentes && preguntasFrecuentes.length > 0) {
   }
   .specs {
     margin-bottom: 1.75rem;
+    padding: 1.5rem;
+  }
+  .specs h2 {
+    margin-top: 0;
   }
   .cuerpo-resena {
     margin-bottom: 2rem;
+    padding: 1.75rem 1.75rem 0.5rem;
   }
   .cuerpo-resena :global(h2) {
     margin-top: 2rem;
     font-size: 1.3rem;
+  }
+  .cuerpo-resena :global(h2:first-child) {
+    margin-top: 0;
   }
   .cuerpo-resena :global(p) {
     max-width: 68ch;
