@@ -23,4 +23,32 @@ const resenas = defineCollection({
   }),
 });
 
-export const collections = { resenas };
+// Resúmenes de capítulos del manga (contenido editorial, no reseñas de producto).
+// Cada capítulo enlaza a la reseña del tomo que lo incluye y ofrece dos opciones
+// de compra: la edición "3 en 1" y, si existe, el tomo individual.
+const capitulos = defineCollection({
+  type: 'content',
+  schema: z.object({
+    numero: z.number(),
+    titulo: z.string(),
+    tituloJapones: z.string().optional(),
+    volumen: z.number(),
+    arco: z.string(),
+    personajes: z.array(z.string()).optional(),
+    resenaTomoSlug: z.string(),
+    tomoTresEnUno: z.object({
+      titulo: z.string(),
+      urlAmazon: z.string().url(),
+    }),
+    tomoIndividual: z
+      .object({
+        titulo: z.string(),
+        urlAmazon: z.string().url(),
+      })
+      .optional(),
+    fechaPublicacion: z.date(),
+    resumenCorto: z.string(),
+  }),
+});
+
+export const collections = { resenas, capitulos };

@@ -1,6 +1,9 @@
 ---
 import { siteConfig } from '../config/site';
 import { url } from '../utils/url';
+import { getCollection } from 'astro:content';
+
+const capitulos = await getCollection('capitulos').catch(() => []);
 ---
 <header class="cabecera">
   <div class="contenedor cabecera-interior">
@@ -9,6 +12,7 @@ import { url } from '../utils/url';
       {siteConfig.categorias.map((cat) => (
         <a href={url(`categoria/${cat.slug}/`)}>{cat.nombre}</a>
       ))}
+      {capitulos.length > 0 && <a href={url('capitulos/')}>Capítulos</a>}
     </nav>
   </div>
 </header>

@@ -8,12 +8,15 @@ export const GET: APIRoute = async ({ site, url: reqUrl }) => {
   const abs = (ruta: string) => new URL(`${base}${ruta}`.replace(/\/{2,}/g, '/'), origin).toString();
 
   const resenas = await getCollection('resenas');
+  const capitulos = await getCollection('capitulos').catch(() => []);
 
   const urls = [
     abs(''),
     abs('aviso-afiliados/'),
     ...siteConfig.categorias.map((c) => abs(`categoria/${c.slug}/`)),
     ...resenas.map((r) => abs(`resenas/${r.slug}/`)),
+    ...(capitulos.length > 0 ? [abs('capitulos/')] : []),
+    ...capitulos.map((c) => abs(`capitulos/${c.slug}/`)),
   ];
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>

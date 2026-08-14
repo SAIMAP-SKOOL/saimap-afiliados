@@ -62,6 +62,10 @@ El único matiz que aparece con cierta frecuencia: cuando un ataque se menciona 
   <iframe src="https://www.youtube.com/embed/9x4VrP8JCFU" title="El Fenómeno de One Piece" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
+## Léelo capítulo a capítulo
+
+¿Prefieres ir viendo de qué trata cada capítulo antes de comprar? Tenemos [resúmenes propios capítulo a capítulo](../../capitulos/), empezando por los cinco primeros capítulos que incluye este mismo tomo.
+
 ## ¿Y después del tomo 1?
 
 Si te engancha, la [continuación es el tomo nº 02 (3 en 1)](../one-piece-02-tres-en-uno/), donde la tripulación empieza a crecer con la incorporación de Nami y Usopp.

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import ChapterLayout from '../../layouts/ChapterLayout.astro';
+
+export async function getStaticPaths() {
+  const capitulos = (await getCollection('capitulos')).sort((a, b) => a.data.numero - b.data.numero);
+  return capitulos.map((entrada, i) => ({
+    params: { slug: entrada.slug },
+    props: {
+      entrada,
+      anterior: i > 0 ? { numero: capitulos[i - 1].data.numero, slug: capitulos[i - 1].slug } : null,
+      siguiente: i < capitulos.length - 1 ? { numero: capitulos[i + 1].data.numero, slug: capitulos[i + 1].slug } : null,
+    },
+  }));
+}
+
+const { entrada, anterior, siguiente } = Astro.props;
+const { Content } = await entrada.render();
+---
+<ChapterLayout
+  slug={entrada.slug}
+  numero={entrada.data.numero}
+  titulo={entrada.data.titulo}
+  tituloJapones={entrada.data.tituloJapones}
+  volumen={entrada.data.volumen}
+  arco={entrada.data.arco}
+  personajes={entrada.data.personajes}
+  resenaTomoSlug={entrada.data.resenaTomoSlug}
+  tomoTresEnUno={entrada.data.tomoTresEnUno}
+  tomoIndividual={entrada.data.tomoIndividual}
+  resumenCorto={entrada.data.resumenCorto}
+  anterior={anterior}
+  siguiente={siguiente}
+>
+  <Content />
+</ChapterLayout>
