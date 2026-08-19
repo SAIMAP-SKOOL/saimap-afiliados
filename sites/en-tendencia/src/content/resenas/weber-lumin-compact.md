@@ -2,6 +2,7 @@
 titulo: "Weber Lumin Compact: la barbacoa eléctrica pensada para terrazas pequeñas"
 producto: "Weber Lumin Compact con soporte (1501653)"
 marca: "Weber"
+imagen: "/media/weber-lumin-compact.jpg"
 precioAprox: "399,00 €"
 pros:
   - "Alcanza más de 315 °C y llega a temperatura en unos 15 minutos gracias al control digital"
