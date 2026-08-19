@@ -1,0 +1,53 @@
+---
+import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
+import { getCollection } from 'astro:content';
+
+const capitulos = await getCollection('capitulos').catch(() => []);
+---
+<header class="cabecera">
+  <div class="contenedor cabecera-interior">
+    <a href={url('')} class="marca">{siteConfig.nombre}</a>
+    <nav>
+      {siteConfig.categorias.map((cat) => (
+        <a href={url(`categoria/${cat.slug}/`)}>{cat.nombre}</a>
+      ))}
+      {capitulos.length > 0 && <a href={url('capitulos/')}>Capítulos</a>}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    border-bottom: 1px solid var(--color-borde);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+  }
+  .cabecera-interior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+  }
+  .marca {
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--color-primario);
+  }
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+  nav a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: #444;
+  }
+  nav a:hover {
+    color: var(--color-primario);
+  }
+</style>

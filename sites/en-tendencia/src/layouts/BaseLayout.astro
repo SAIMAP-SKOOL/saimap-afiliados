@@ -1,0 +1,70 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
+import '../styles/global.css';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+  imagenOg?: string;
+  tipo?: 'website' | 'article';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+const {
+  titulo,
+  descripcion = siteConfig.descripcion,
+  imagenOg,
+  tipo = 'website',
+  jsonLd,
+} = Astro.props;
+
+const tituloCompleto = `${titulo} · ${siteConfig.nombre}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const imagenAbsoluta = imagenOg ? new URL(url(imagenOg.replace(/^\//, '')), Astro.site).toString() : undefined;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+
+    <meta property="og:type" content={tipo} />
+    <meta property="og:site_name" content={siteConfig.nombre} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonical} />
+    {imagenAbsoluta && <meta property="og:image" content={imagenAbsoluta} />}
+    <meta name="twitter:card" content={imagenAbsoluta ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={tituloCompleto} />
+    <meta name="twitter:description" content={descripcion} />
+    {imagenAbsoluta && <meta name="twitter:image" content={imagenAbsoluta} />}
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    {siteConfig.adsensePublisherId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsensePublisherId}`}
+        crossorigin="anonymous"
+      />
+    )}
+  </head>
+  <body
+    class={siteConfig.fondoPatron ? 'con-fondo-patron' : ''}
+    style={siteConfig.fondoPatron ? `background-image: url('${url(siteConfig.fondoPatron.replace(/^\//, ''))}')` : undefined}
+  >
+    <Header />
+    <main class="contenedor">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

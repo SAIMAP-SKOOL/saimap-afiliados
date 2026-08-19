@@ -1,0 +1,268 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import StarRating from '../components/StarRating.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SpecsTable from '../components/SpecsTable.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ProductosRelacionados from '../components/ProductosRelacionados.astro';
+import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
+
+interface Props {
+  slug: string;
+  titulo: string;
+  producto: string;
+  marca?: string;
+  imagen?: string;
+  precioAprox: string;
+  valoracion?: number;
+  pros: string[];
+  contras: string[];
+  urlAmazon: string;
+  categoria: string;
+  resumen: string;
+  especificaciones?: Record<string, string>;
+  preguntasFrecuentes?: { pregunta: string; respuesta: string }[];
+}
+const {
+  slug,
+  titulo,
+  producto,
+  marca,
+  imagen,
+  precioAprox,
+  valoracion,
+  pros,
+  contras,
+  urlAmazon,
+  categoria,
+  resumen,
+  especificaciones,
+  preguntasFrecuentes,
+} = Astro.props;
+
+const categoriaInfo = siteConfig.categorias.find((c) => c.slug === categoria);
+const enlaceCompra = `${urlAmazon}${urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`;
+
+const precioNumerico = precioAprox.match(/(\d+)[,.](\d+)/);
+const precioSchema = precioNumerico ? `${precioNumerico[1]}.${precioNumerico[2]}` : undefined;
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: producto,
+    description: resumen,
+    ...(marca && { brand: { '@type': 'Brand', name: marca } }),
+    ...(precioSchema && {
+      offers: {
+        '@type': 'Offer',
+        url: enlaceCompra,
+        priceCurrency: 'EUR',
+        price: precioSchema,
+        availability: 'https://schema.org/InStock',
+      },
+    }),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(url(''), Astro.site).toString() },
+      ...(categoriaInfo
+        ? [{ '@type': 'ListItem', position: 2, name: categoriaInfo.nombre, item: new URL(url(`categoria/${categoria}/`), Astro.site).toString() }]
+        : []),
+      { '@type': 'ListItem', position: 3, name: titulo },
+    ],
+  },
+];
+if (preguntasFrecuentes && preguntasFrecuentes.length > 0) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: preguntasFrecuentes.map((p) => ({
+      '@type': 'Question',
+      name: p.pregunta,
+      acceptedAnswer: { '@type': 'Answer', text: p.respuesta },
+    })),
+  });
+}
+---
+<BaseLayout titulo={titulo} descripcion={resumen} imagenOg={imagen} tipo="article" jsonLd={jsonLd}>
+  <Breadcrumbs
+    migas={[
+      { nombre: 'Inicio', href: '' },
+      ...(categoriaInfo ? [{ nombre: categoriaInfo.nombre, href: `categoria/${categoria}/` }] : []),
+      { nombre: titulo },
+    ]}
+  />
+
+  <article class="resena">
+    <h1>{titulo}</h1>
+
+    <div class="cabecera-resena tarjeta">
+      {imagen && <img src={url(imagen)} alt={producto} loading="eager" />}
+      <div class="resumen-resena">
+        {valoracion !== undefined && <StarRating valoracion={valoracion} />}
+        <p class="precio">Precio aproximado: <strong>{precioAprox}</strong></p>
+        <a href={enlaceCompra} class="boton-amazon boton-grande" target="_blank" rel="nofollow sponsored noopener">
+          🛒 Ver precio en Amazon
+        </a>
+        <p class="microcopy">Envío con Amazon · Compra 100% segura</p>
+      </div>
+    </div>
+
+    <div class="resumen-rapido">
+      <p><strong>En resumen:</strong> {resumen}</p>
+    </div>
+
+    <div class="pros-contras">
+      <div class="tarjeta tarjeta-pros">
+        <h2>✅ Pros</h2>
+        <ul>
+          {pros.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+      <div class="tarjeta tarjeta-contras">
+        <h2>⚠️ Contras</h2>
+        <ul>
+          {contras.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    {especificaciones && (
+      <section class="specs tarjeta">
+        <h2>Ficha técnica</h2>
+        <SpecsTable especificaciones={especificaciones} />
+      </section>
+    )}
+
+    <div class="cuerpo-resena tarjeta">
+      <slot />
+    </div>
+
+    <div class="cta-banda">
+      <p>¿Te convence {producto}?</p>
+      <a href={enlaceCompra} class="boton-amazon boton-grande" target="_blank" rel="nofollow sponsored noopener">
+        🛒 Comprar en Amazon
+      </a>
+    </div>
+
+    {preguntasFrecuentes && preguntasFrecuentes.length > 0 && (
+      <FaqSection preguntas={preguntasFrecuentes} />
+    )}
+
+    <ProductosRelacionados categoria={categoria} slugActual={slug} />
+  </article>
+</BaseLayout>
+
+<style>
+  .resena h1 {
+    margin-top: 1.5rem;
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+  .cabecera-resena {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .cabecera-resena img {
+    max-width: 320px;
+    width: 100%;
+    background: var(--color-fondo-alt);
+    border-radius: var(--radio);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  .resumen-resena {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .microcopy {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0;
+  }
+  .resumen-rapido {
+    background: linear-gradient(135deg, var(--color-fondo-alt), #fff);
+    border-left: 4px solid var(--color-acento);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+  .resumen-rapido p {
+    margin: 0;
+  }
+  .pros-contras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .tarjeta-pros {
+    border-color: #bfe3c8;
+  }
+  .tarjeta-contras {
+    border-color: #f0d3ab;
+  }
+  .pros-contras h2 {
+    margin-top: 0;
+    font-size: 1.05rem;
+  }
+  .specs {
+    margin-bottom: 1.75rem;
+    padding: 1.5rem;
+  }
+  .specs h2 {
+    margin-top: 0;
+  }
+  .cuerpo-resena {
+    margin-bottom: 2rem;
+    padding: 1.75rem 1.75rem 0.5rem;
+  }
+  .cuerpo-resena :global(h2) {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+  }
+  .cuerpo-resena :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .cuerpo-resena :global(p) {
+    max-width: 68ch;
+  }
+  .cta-banda {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--color-primario);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radio);
+    margin: 2rem 0;
+  }
+  .cta-banda p {
+    margin: 0;
+    font-weight: 600;
+  }
+  .boton-grande {
+    font-size: 1.05rem;
+    padding: 0.85rem 1.6rem;
+    box-shadow: 0 4px 14px rgba(255, 159, 28, 0.35);
+  }
+  @media (max-width: 600px) {
+    .pros-contras {
+      grid-template-columns: 1fr;
+    }
+    .cta-banda {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

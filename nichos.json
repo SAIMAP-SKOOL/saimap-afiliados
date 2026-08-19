@@ -8,5 +8,10 @@
     "slug": "pokemon",
     "nombre": "Pokémon",
     "descripcion": "Reseñas de cartas, peluches y merchandising de Pokémon"
+  },
+  {
+    "slug": "en-tendencia",
+    "nombre": "En Tendencia",
+    "descripcion": "Reseñas de moda, belleza, hogar y los productos más virales del momento"
   }
 ]

@@ -1,0 +1,231 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { siteConfig } from '../config/site';
+import { url } from '../utils/url';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  slug: string;
+  numero: number;
+  titulo: string;
+  tituloJapones?: string;
+  imagen?: string;
+  volumen: number;
+  arco: string;
+  personajes?: string[];
+  resenaTomoSlug: string;
+  tomoTresEnUno: { titulo: string; urlAmazon: string };
+  tomoIndividual?: { titulo: string; urlAmazon: string };
+  resumenCorto: string;
+  anterior?: { numero: number; slug: string } | null;
+  siguiente?: { numero: number; slug: string } | null;
+}
+const {
+  numero,
+  titulo,
+  tituloJapones,
+  imagen,
+  volumen,
+  arco,
+  personajes,
+  resenaTomoSlug,
+  tomoTresEnUno,
+  tomoIndividual,
+  resumenCorto,
+  anterior,
+  siguiente,
+} = Astro.props;
+
+const enlaceTresEnUno = `${tomoTresEnUno.urlAmazon}${tomoTresEnUno.urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`;
+const enlaceIndividual = tomoIndividual
+  ? `${tomoIndividual.urlAmazon}${tomoIndividual.urlAmazon.includes('?') ? '&' : '?'}tag=${siteConfig.amazonTag}`
+  : undefined;
+
+const resenaTomo = await getEntry('resenas', resenaTomoSlug);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `Capítulo ${numero}: ${titulo}`,
+    description: resumenCorto,
+    isPartOf: { '@type': 'CreativeWorkSeries', name: 'One Piece' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL(url(''), Astro.site).toString() },
+      { '@type': 'ListItem', position: 2, name: 'Capítulos', item: new URL(url('capitulos/'), Astro.site).toString() },
+      { '@type': 'ListItem', position: 3, name: `Capítulo ${numero}` },
+    ],
+  },
+];
+---
+<BaseLayout titulo={`Capítulo ${numero}: ${titulo}`} descripcion={resumenCorto} imagenOg={imagen} tipo="article" jsonLd={jsonLd}>
+  <Breadcrumbs
+    migas={[
+      { nombre: 'Inicio', href: '' },
+      { nombre: 'Capítulos', href: 'capitulos/' },
+      { nombre: `Capítulo ${numero}` },
+    ]}
+  />
+
+  <article class="capitulo">
+    <h1>Capítulo {numero}: {titulo}</h1>
+    {tituloJapones && <p class="titulo-original">Título original: {tituloJapones}</p>}
+
+    <div class="ficha-capitulo tarjeta">
+      <div>
+        <span class="etiqueta">Volumen</span>
+        <span>{volumen}</span>
+      </div>
+      <div>
+        <span class="etiqueta">Arco</span>
+        <span>{arco}</span>
+      </div>
+      {personajes && personajes.length > 0 && (
+        <div>
+          <span class="etiqueta">Personajes destacados</span>
+          <span>{personajes.join(', ')}</span>
+        </div>
+      )}
+    </div>
+
+    {imagen && (
+      <img src={url(imagen)} alt={`Infografía del capítulo ${numero}: ${titulo}`} loading="lazy" class="imagen-capitulo" />
+    )}
+
+    <div class="compra-capitulo tarjeta">
+      <h2>¿Dónde leer este capítulo?</h2>
+      <p>Este capítulo forma parte del volumen {volumen} de One Piece, disponible en dos formatos:</p>
+      <div class="opciones-compra">
+        <a href={enlaceTresEnUno} class="boton-amazon boton-grande" target="_blank" rel="nofollow sponsored noopener">
+          🛒 {tomoTresEnUno.titulo}
+        </a>
+        {enlaceIndividual && tomoIndividual && (
+          <a href={enlaceIndividual} class="boton-amazon boton-secundario" target="_blank" rel="nofollow sponsored noopener">
+            📖 {tomoIndividual.titulo}
+          </a>
+        )}
+      </div>
+      {resenaTomo && (
+        <p class="enlace-resena">
+          <a href={url(`resenas/${resenaTomo.slug}/`)}>Ver la reseña completa de este tomo →</a>
+        </p>
+      )}
+    </div>
+
+    <div class="cuerpo-capitulo tarjeta">
+      <slot />
+    </div>
+
+    <nav class="nav-capitulos">
+      {anterior ? (
+        <a href={url(`capitulos/${anterior.slug}/`)} class="nav-anterior">← Capítulo {anterior.numero}</a>
+      ) : <span />}
+      <a href={url('capitulos/')} class="nav-indice">Todos los capítulos</a>
+      {siguiente ? (
+        <a href={url(`capitulos/${siguiente.slug}/`)} class="nav-siguiente">Capítulo {siguiente.numero} →</a>
+      ) : <span />}
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .capitulo h1 {
+    margin-top: 1.5rem;
+    font-size: 1.75rem;
+    line-height: 1.25;
+  }
+  .titulo-original {
+    color: #666;
+    font-style: italic;
+    margin-top: -0.5rem;
+  }
+  .ficha-capitulo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .ficha-capitulo > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .etiqueta {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #888;
+  }
+  .cuerpo-capitulo {
+    margin-bottom: 1.5rem;
+    padding: 1.75rem;
+  }
+  .cuerpo-capitulo :global(h2) {
+    margin-top: 1.75rem;
+    font-size: 1.2rem;
+  }
+  .cuerpo-capitulo :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .cuerpo-capitulo :global(p) {
+    max-width: 68ch;
+  }
+  .imagen-capitulo {
+    display: block;
+    width: 100%;
+    border-radius: var(--radio);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    margin-bottom: 1.75rem;
+  }
+  .compra-capitulo {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+  .compra-capitulo h2 {
+    margin-top: 0;
+  }
+  .opciones-compra {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 1rem 0;
+  }
+  .boton-secundario {
+    background: var(--color-fondo);
+    color: var(--color-primario);
+    border: 2px solid var(--color-primario);
+    box-shadow: none;
+  }
+  .enlace-resena {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+  }
+  .nav-capitulos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+  }
+  .nav-anterior,
+  .nav-siguiente {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .nav-indice {
+    color: #666;
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    .nav-capitulos {
+      flex-direction: column;
+    }
+  }
+</style>

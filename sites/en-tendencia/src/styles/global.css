@@ -1,0 +1,148 @@
+:root {
+  --color-primario: #1a1a2e;
+  --color-primario-claro: #2d2d54;
+  --color-texto: #1c1c1c;
+  --color-fondo: #ffffff;
+  --color-fondo-alt: #f6f6f8;
+  --color-borde: #e2e2e8;
+  --color-acento: #ff9f1c;
+  --color-acento-oscuro: #e07f00;
+  --radio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+.contenedor {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.boton-amazon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, var(--color-acento), var(--color-acento-oscuro));
+  color: #1a1a1a;
+  font-weight: 700;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radio);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 8px rgba(224, 127, 0, 0.25);
+}
+
+.boton-amazon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 127, 0, 0.35);
+}
+
+.tarjeta {
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  background: var(--color-fondo);
+}
+
+.aviso-afiliados {
+  background: var(--color-fondo-alt);
+  border-top: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  font-size: 0.85rem;
+  padding: 0.6rem 0;
+  text-align: center;
+  color: #555;
+}
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+table.tabla-comparativa {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+table.tabla-comparativa th,
+table.tabla-comparativa td {
+  border: 1px solid var(--color-borde);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+table.tabla-comparativa th {
+  background: var(--color-fondo-alt);
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 1.5rem 0;
+  border-radius: var(--radio);
+  overflow: hidden;
+  background: var(--color-fondo-alt);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Fondo temático opcional (siteConfig.fondoPatron): imagen repetida a baja
+   presencia con un velo claro encima para que el contenido siga siendo
+   legible, y tonos de tarjeta ligeramente cálidos ("pergamino"). */
+body.con-fondo-patron {
+  --color-fondo-alt: #f7f0e2;
+  --color-borde: #e6d9b8;
+  background-repeat: repeat;
+  background-size: 320px auto;
+  background-attachment: fixed;
+}
+
+body.con-fondo-patron::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.87);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.con-fondo-patron > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.con-fondo-patron .tarjeta,
+body.con-fondo-patron .cta-banda,
+body.con-fondo-patron .video-embed {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}

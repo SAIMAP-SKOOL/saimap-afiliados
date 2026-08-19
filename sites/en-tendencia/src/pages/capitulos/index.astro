@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { url } from '../../utils/url';
+
+const capitulos = (await getCollection('capitulos')).sort((a, b) => a.data.numero - b.data.numero);
+---
+<BaseLayout titulo="Todos los capítulos" descripcion="Resúmenes propios, capítulo a capítulo, con enlaces de compra al tomo correspondiente.">
+  <section class="hero">
+    <h1>Capítulos</h1>
+    <p>Resúmenes propios de la historia, capítulo a capítulo, con enlaces al tomo en el que se publicó cada uno.</p>
+  </section>
+
+  <ul class="lista-capitulos">
+    {capitulos.map((c) => (
+      <li>
+        <a href={url(`capitulos/${c.slug}/`)} class="tarjeta">
+          <span class="numero">Cap. {c.data.numero}</span>
+          <span class="titulo">{c.data.titulo}</span>
+          <span class="arco">{c.data.arco} · Volumen {c.data.volumen}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  {capitulos.length === 0 && <p>Todavía no hay capítulos publicados.</p>}
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 2rem 0 1rem;
+  }
+  .hero p {
+    color: #555;
+    max-width: 60ch;
+  }
+  .lista-capitulos {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .lista-capitulos a {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .lista-capitulos a:hover {
+    transform: translateX(4px);
+  }
+  .numero {
+    font-weight: 700;
+    color: var(--color-acento-oscuro);
+    min-width: 4.5rem;
+  }
+  .titulo {
+    font-weight: 600;
+    flex-grow: 1;
+  }
+  .arco {
+    font-size: 0.85rem;
+    color: #777;
+  }
+</style>
