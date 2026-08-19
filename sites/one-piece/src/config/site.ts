@@ -10,7 +10,7 @@ export const siteConfig = {
   fondoPatron: '/media/fondo-wanted.jpg',
   // Pon aquí tu ID de editor (formato "pub-XXXXXXXXXXXXXXXX") en cuanto
   // Google apruebe la cuenta de AdSense; hasta entonces, déjalo así.
-  adsensePublisherId: undefined as string | undefined,
+  adsensePublisherId: 'pub-2380420808720124' as string | undefined,
   categorias: [
     { slug: 'manga', nombre: 'Manga' },
     { slug: 'figuras', nombre: 'Figuras' },
