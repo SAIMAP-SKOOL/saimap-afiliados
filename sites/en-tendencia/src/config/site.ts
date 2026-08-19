@@ -10,7 +10,10 @@ export const siteConfig = {
   // Ruta opcional (dentro de public/) a una imagen de fondo temática,
   // repetida sutilmente detrás del contenido. Déjalo sin definir para
   // usar el fondo blanco por defecto.
-  fondoPatron: undefined as string | undefined,
+  fondoPatron: '/media/fondo-vichy.jpg' as string | undefined,
+  // El patrón vichy es muy claro (lavanda pastel), así que baja el velo
+  // blanco para que se vea (por defecto es 0.87, pensado para patrones oscuros).
+  fondoPatronVelo: 0.55 as number | undefined,
   // ID de editor de Google AdSense (formato "pub-XXXXXXXXXXXXXXXX"), una vez
   // aprobada la cuenta. Déjalo sin definir para no cargar ningún script de
   // AdSense ni servir ads.txt.

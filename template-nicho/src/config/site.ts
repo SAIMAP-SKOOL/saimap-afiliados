@@ -11,6 +11,10 @@ export const siteConfig = {
   // repetida sutilmente detrás del contenido. Déjalo sin definir para
   // usar el fondo blanco por defecto.
   fondoPatron: undefined as string | undefined,
+  // Opacidad (0-1) del velo blanco sobre el fondo temático. Baja este valor
+  // (ej. 0.4-0.6) para patrones muy claros/pastel que si no quedan casi
+  // invisibles bajo el velo por defecto (0.87, pensado para patrones oscuros).
+  fondoPatronVelo: undefined as number | undefined,
   // ID de editor de Google AdSense (formato "pub-XXXXXXXXXXXXXXXX"), una vez
   // aprobada la cuenta. Déjalo sin definir para no cargar ningún script de
   // AdSense ni servir ads.txt.

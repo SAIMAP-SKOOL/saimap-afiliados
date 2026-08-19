@@ -59,7 +59,11 @@ const imagenAbsoluta = imagenOg ? new URL(url(imagenOg.replace(/^\//, '')), Astr
   </head>
   <body
     class={siteConfig.fondoPatron ? 'con-fondo-patron' : ''}
-    style={siteConfig.fondoPatron ? `background-image: url('${url(siteConfig.fondoPatron.replace(/^\//, ''))}')` : undefined}
+    style={siteConfig.fondoPatron
+      ? `background-image: url('${url(siteConfig.fondoPatron.replace(/^\//, ''))}');${
+          siteConfig.fondoPatronVelo !== undefined ? ` --fondo-patron-velo: ${siteConfig.fondoPatronVelo};` : ''
+        }`
+      : undefined}
   >
     <Header />
     <main class="contenedor">
