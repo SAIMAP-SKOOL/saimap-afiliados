@@ -8,6 +8,9 @@ export const siteConfig = {
   amazonTag: 'saimap0b-21',
   colorPrimario: '#1a1a2e',
   fondoPatron: '/media/fondo-wanted.jpg',
+  // Pon aquí tu ID de editor (formato "pub-XXXXXXXXXXXXXXXX") en cuanto
+  // Google apruebe la cuenta de AdSense; hasta entonces, déjalo así.
+  adsensePublisherId: undefined as string | undefined,
   categorias: [
     { slug: 'manga', nombre: 'Manga' },
     { slug: 'figuras', nombre: 'Figuras' },

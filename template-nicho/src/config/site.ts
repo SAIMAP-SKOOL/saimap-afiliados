@@ -11,6 +11,10 @@ export const siteConfig = {
   // repetida sutilmente detrás del contenido. Déjalo sin definir para
   // usar el fondo blanco por defecto.
   fondoPatron: undefined as string | undefined,
+  // ID de editor de Google AdSense (formato "pub-XXXXXXXXXXXXXXXX"), una vez
+  // aprobada la cuenta. Déjalo sin definir para no cargar ningún script de
+  // AdSense ni servir ads.txt.
+  adsensePublisherId: undefined as string | undefined,
   categorias: [
     { slug: 'general', nombre: 'General' },
   ],
